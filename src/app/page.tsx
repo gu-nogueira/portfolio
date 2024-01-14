@@ -1,15 +1,18 @@
-import About from '@/components/sections/About'
-import Footer from '@/components/sections/Footer'
-import Header from '@/components/sections/Header'
+import About from "@/components/sections/About";
+import Footer from "@/components/sections/Footer";
+import Header from "@/components/sections/Header";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <About />
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-    </main>
-    <Footer />
+      {/* <About /> */}
+      {/* <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      </main> */}
+      <main className="flex items-center justify-center h-screen flex-col">
+        fala cidadaaao
+      </main>
+      <Footer />
     </>
-  )
+  );
 }
