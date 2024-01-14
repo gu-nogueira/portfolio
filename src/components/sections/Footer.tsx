@@ -1,13 +1,9 @@
-// components/Footer.jsx
-
-export default function Footer() {
+const Footer = () => {
   return (
     <>
-      <hr/>
+      <hr />
       <div className="footer-container">
-        <p>
-          © {new Date().getFullYear()} Gustavo Nogueira
-        </p>
+        <p>© {new Date().getFullYear()} Gustavo Nogueira</p>
         <div className="social_icons">
           <a
             href="https://twitter.com/"
@@ -36,5 +32,7 @@ export default function Footer() {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
+
+export default Footer;

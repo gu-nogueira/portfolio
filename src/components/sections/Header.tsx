@@ -8,7 +8,7 @@ import { Moon, Sun } from "@phosphor-icons/react";
 // ** Components
 import { Switch } from "@/components/ui/Switch";
 
-export default function Header() {
+const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const { theme, setTheme } = useTheme();
@@ -32,7 +32,7 @@ export default function Header() {
 
   return (
     <header
-      className={`transition-all bg-opacity-90 backdrop-filter backdrop-blur-lg border-b-2 ${scrolled ? "sticky top-0 z-10 border-gray-200" : "border-transparent"}`}
+      className={`transition-all bg-opacity-90 backdrop-filter backdrop-blur-lg border-b-2 ${scrolled ? "sticky top-0 z-10 border-gray-200 dark:border-gray-700" : "border-transparent"}`}
     >
       <div className="container mx-auto flex items-center justify-between p-4">
         <Link className="text-2xl font-bold" href="#hero">
@@ -58,4 +58,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

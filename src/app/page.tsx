@@ -1,18 +1,39 @@
-import About from "@/components/sections/About";
+import { GithubUserData } from "@/types/github";
+
 import Footer from "@/components/sections/Footer";
 import Header from "@/components/sections/Header";
+import Hero from "@/components/sections/Hero";
 
-export default function Home() {
+interface HomeProps {
+  userData?: GithubUserData;
+}
+
+export default async function Home({}: HomeProps) {
+  const userData = await getUserData();
   return (
     <>
       <Header />
-      {/* <About /> */}
-      {/* <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      </main> */}
+      <Hero userData={userData} />
       <main className="flex items-center justify-center h-screen flex-col">
         fala cidadaaao
       </main>
       <Footer />
     </>
   );
+}
+
+async function getUserData() {
+  try {
+    const response = await fetch("https://api.github.com/users/gu-nogueira", {
+      next: {
+        revalidate: 7 * 24 * 60 * 60, // 1 week
+      },
+    });
+    if (response.ok) {
+      const data: GithubUserData = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+  }
 }
