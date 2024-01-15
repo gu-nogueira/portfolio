@@ -1,8 +1,9 @@
 import { GithubUserData } from "@/types/github";
 
-import Footer from "@/components/sections/Footer";
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
+import Presentation from "@/components/sections/Presentation";
+import Footer from "@/components/sections/Footer";
 
 export default async function Home({}) {
   const userData = await getUserData();
@@ -10,6 +11,8 @@ export default async function Home({}) {
     <>
       <Header />
       <Hero userData={userData} />
+      <hr className="border-gray-200 dark:border-gray-700" />
+      <Presentation />
       <main className="flex items-center justify-center h-screen flex-col">
         fala cidadaaao
       </main>

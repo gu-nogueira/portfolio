@@ -2,8 +2,11 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { GithubUserData } from "@/types/github";
+
+import { buttonVariants } from "@/components/ui/button";
 
 interface HeroProps {
   userData?: GithubUserData;
@@ -85,8 +88,8 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
   };
 
   return (
-    <section className="py-16 text-center">
-      <div className="container mx-auto">
+    <section id="hero" className="h-screen flex items-center text-center">
+      <div className="container mx-auto mt-[-4rem]">
         {userData && (
           <div className="relative inline-block">
             <div className="p-1 rounded-full overflow-hidden bg-gradient-to-tl from-primary to-cyan-200 dark:to-green-300">
@@ -111,10 +114,30 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
           {" "}
           I&apos;m a {displayedPhraseRef.current + (pulsingCursor ? "|" : "")}
         </h1>
-        <p className="text-xl mt-4">
+        <p className="text-xl mt-6">
           I&apos;m always looking for new projects and challenges. Checkout my
           projects! 👇
         </p>
+        <div className="flex items-center justify-center space-x-4 mt-8">
+          <Link
+            href="#projects"
+            className={buttonVariants({
+              variant: "outline",
+              className:
+                " hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20",
+            })}
+          >
+            See projects
+          </Link>
+          <Link
+            href="#reach-me"
+            className={buttonVariants({
+              variant: "default",
+            })}
+          >
+            Reach me
+          </Link>
+        </div>
       </div>
     </section>
   );
