@@ -72,17 +72,29 @@ module.exports = {
           to: { height: "0" },
         },
         handshake: {
-          "0%": { transform: "rotate(-45deg)" },
-          "25%": { transform: "rotate(-15deg)" },
-          "50%": { transform: "rotate(-45deg)" },
-          "75%": { transform: "rotate(-75deg)" },
-          "100%": { transform: "rotate(-45deg)" },
+          "0%": { transform: "rotate(-45deg)", transformOrigin: "bottom left" },
+          "25%": {
+            transform: "rotate(-25deg)",
+            transformOrigin: "bottom left",
+          },
+          "50%": {
+            transform: "rotate(-45deg)",
+            transformOrigin: "bottom left",
+          },
+          "75%": {
+            transform: "rotate(-55deg)",
+            transformOrigin: "bottom left",
+          },
+          "100%": {
+            transform: "rotate(-45deg)",
+            transformOrigin: "bottom left",
+          },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        handshake: "handshake 0.75s ease-in-out infinite",
+        handshake: "handshake 0.75s ease-out infinite",
       },
     },
   },

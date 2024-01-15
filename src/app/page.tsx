@@ -4,11 +4,7 @@ import Footer from "@/components/sections/Footer";
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
 
-interface HomeProps {
-  userData?: GithubUserData;
-}
-
-export default async function Home({}: HomeProps) {
+export default async function Home({}) {
   const userData = await getUserData();
   return (
     <>
@@ -31,6 +27,7 @@ async function getUserData() {
     });
     if (response.ok) {
       const data: GithubUserData = await response.json();
+      console.log("data", data);
       return data;
     }
   } catch (error) {
