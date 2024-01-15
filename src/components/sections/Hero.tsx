@@ -69,7 +69,7 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
           clearInterval(cursorInterval);
         }, 2000);
       }
-    }, 50);
+    }, 40);
   };
 
   // useEffect(() => {
@@ -112,7 +112,7 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
         </div>
         <h1 className="text-6xl font-bold mt-2">
           {" "}
-          I&apos;m a {displayedPhraseRef.current + (pulsingCursor ? "|" : "")}
+          I&apos;m a {displayedPhrase + (pulsingCursor ? "|" : "")}
         </h1>
         <p className="text-xl mt-6">
           I&apos;m always looking for new projects and challenges. Checkout my

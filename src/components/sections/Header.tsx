@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "@phosphor-icons/react";
 
@@ -13,40 +13,53 @@ const Header = () => {
   const { theme, setTheme } = useTheme();
 
   const [scrolled, setScrolled] = useState(false);
+  const [currentSection, setCurrentSection] = useState("");
 
-  const routes = [
-    {
-      path: "#hero",
-      name: "Home",
-    },
-    {
-      path: "#presentation",
-      name: "Presentation",
-    },
-    {
-      path: "#projects",
-      name: "Projects",
-    },
-    {
-      path: "#experiences",
-      name: "Experiences",
-    },
-    {
-      path: "#education",
-      name: "Education",
-    },
-    {
-      path: "#reach-me",
-      name: "Reach me",
-    },
-  ];
-
-  const currentSection = window.location.hash;
+  const routes = useMemo(() => {
+    return [
+      {
+        path: "#hero",
+        name: "Home",
+      },
+      {
+        path: "#presentation",
+        name: "Presentation",
+      },
+      {
+        path: "#projects",
+        name: "Projects",
+      },
+      {
+        path: "#experiences",
+        name: "Experiences",
+      },
+      {
+        path: "#education",
+        name: "Education",
+      },
+      {
+        path: "#reach-me",
+        name: "Reach me",
+      },
+    ];
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 0;
       setScrolled(isScrolled);
+
+      const currentRoute = routes.find((route) => {
+        const section = document.querySelector(route.path);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          return rect.top >= 0 && rect.bottom <= window.innerHeight;
+        }
+      });
+
+      if (currentRoute) {
+        setCurrentSection(currentRoute.path);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -54,7 +67,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [routes]);
 
   const handleToggleDarkMode = (isChecked: boolean) => {
     setTheme(isChecked ? "dark" : "light");
