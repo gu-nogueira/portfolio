@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { GithubUserData } from "@/types/github";
 
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/Button";
 
 interface HeroProps {
   userData?: GithubUserData;
