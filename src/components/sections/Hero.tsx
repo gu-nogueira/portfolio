@@ -89,7 +89,7 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
 
   return (
     <section id="hero" className="h-screen flex items-center text-center">
-      <div className="container mx-auto mt-[-4rem]">
+      <div className="container mx-auto">
         {userData && (
           <div className="relative inline-block">
             <div className="p-1 rounded-full overflow-hidden bg-gradient-to-tl from-primary to-cyan-200 dark:to-green-300">

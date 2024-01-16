@@ -1,6 +1,9 @@
 const Presentation = () => {
   return (
-    <section id="presentation" className="bg-gray-100 dark:bg-gray-900 p-8">
+    <section
+      id="presentation"
+      className="bg-gray-100 dark:bg-gray-900 px-8 py-10"
+    >
       <div className="container mx-auto">
         <h2 className="text-4xl font-bold mb-4">About Me</h2>
         <p className="text-gray-700 dark:text-gray-300 text-justify">
