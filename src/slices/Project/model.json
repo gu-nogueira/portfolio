@@ -1,0 +1,76 @@
+{
+  "id": "project",
+  "type": "SharedSlice",
+  "name": "Project",
+  "description": "Project",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "project_image": {
+          "type": "Image",
+          "config": {
+            "label": "Project Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "project_name": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Project Name",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "project_url": {
+          "type": "Link",
+          "config": {
+            "label": "Project Url",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "project_source_code": {
+          "type": "Link",
+          "config": {
+            "label": "Project Source Code",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "project_description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Project Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "project_built_at": {
+          "type": "Date",
+          "config": {
+            "label": "Project Built at",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {
+        "project_tag": {
+          "type": "Text",
+          "config": {
+            "label": "Project Tag",
+            "placeholder": ""
+          }
+        }
+      }
+    }
+  ]
+}

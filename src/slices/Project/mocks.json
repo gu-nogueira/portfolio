@@ -1,0 +1,87 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"project_image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a",
+					"width": 3456,
+					"height": 4320
+				},
+				"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a",
+				"width": 3456,
+				"height": 4320,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"project_name": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nisi consectetur deserunt ex fugiat quis Lorem aliqua sunt fugiat. Anim exercitation consequat tempor et pariatur velit Lorem reprehenderit culpa tempor non eiusmod et nostrud. Pariatur veniam tempor labore eiusmod."
+						}
+					}
+				]
+			},
+			"project_url": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev"
+				}
+			},
+			"project_source_code": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com"
+				}
+			},
+			"project_description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nostrud voluptate commodo sunt magna id magna exercitation laborum ipsum laborum voluptate veniam incididunt. Nisi do incididunt laborum fugiat ea dolore do laboris sunt elit est Lorem pariatur sint. Minim ut sunt non nisi eu id."
+						}
+					}
+				]
+			},
+			"project_built_at": {
+				"__TYPE__": "FieldContent",
+				"type": "Date",
+				"value": "2012-10-21"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"project_tag",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "select",
+							"type": "Text"
+						}
+					]
+				]
+			}
+		]
+	}
+]

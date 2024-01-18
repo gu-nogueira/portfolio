@@ -1,11 +1,8 @@
 const Presentation = () => {
   return (
-    <section
-      id="presentation"
-      className="bg-gray-100 dark:bg-gray-900 px-8 py-10"
-    >
+    <section id="presentation" className="bg-gray-100 dark:bg-gray-900 py-16">
       <div className="container mx-auto">
-        <h2 className="text-4xl font-bold mb-4">About Me</h2>
+        <h2 className="text-4xl font-bold mb-6">Presentation</h2>
         <p className="text-gray-700 dark:text-gray-300 text-justify">
           I have been flowing in the IT and technology field since childhood,
           tinkering with games, building and repairing computers. In high

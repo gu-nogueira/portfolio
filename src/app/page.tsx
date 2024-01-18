@@ -1,4 +1,7 @@
+import { createClient } from "@/services/prismic";
+
 import { GithubUserData, RepositoryData } from "@/types/github";
+import { PrismicData } from "@/types/prismic";
 
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
@@ -10,20 +13,10 @@ import Education from "@/components/sections/Education";
 import ReachMe from "@/components/sections/ReachMe";
 
 export default async function Home({}) {
-  const portfolioData = await getPortfolioData();
-
-  console.log("portfolioData", portfolioData);
-
-  const projects = [
-    {
-      id: "1",
-      title: "Project 1",
-      description: "Description of Project 1.",
-      // imageUrl: "https://example.com/project1-image.jpg",
-      projectUrl: "https://example.com/project1",
-    },
-    // Add more projects as needed
-  ];
+  const [portfolioData, prismicContent] = await Promise.all([
+    getPortfolioData(),
+    getPrismicContent(),
+  ]);
 
   return (
     <>
@@ -32,7 +25,7 @@ export default async function Home({}) {
       <hr className="border-gray-200 dark:border-gray-700" />
       <Presentation />
       <hr className="border-gray-200 dark:border-gray-700" />
-      <Projects projects={projects} />
+      <Projects projects={prismicContent?.projects} />
       <hr className="border-gray-200 dark:border-gray-700" />
       <Experiences />
       <hr className="border-gray-200 dark:border-gray-700" />
@@ -72,5 +65,37 @@ async function getPortfolioData() {
     }
   } catch (error) {
     console.error("Error fetching user data:", error);
+  }
+}
+
+async function getPrismicContent(): Promise<PrismicData | undefined> {
+  const prismic = createClient();
+
+  try {
+    const response = await prismic.getAllByType("project", {
+      // fetch: ["post.title", "post.content"],
+      pageSize: 100,
+    });
+
+    const projects = response.map((response) => {
+      const sliceMainContent = response.data.slices[0]?.primary;
+      const sliceItems = response.data.slices[0]?.items;
+      return {
+        id: response.uid,
+        title: sliceMainContent?.project_name[0]?.text,
+        description: sliceMainContent?.project_description[0]?.text,
+        imageUrl: sliceMainContent?.project_image.url,
+        alt: sliceMainContent?.project_image.alt,
+        projectUrl: sliceMainContent?.project_url,
+        sourceCode: sliceMainContent?.project_source_code,
+        tags: sliceItems?.map((item) => item.project_tag),
+      };
+    });
+
+    return {
+      projects,
+    };
+  } catch (error) {
+    console.error("Error fetching prismic content:", error);
   }
 }

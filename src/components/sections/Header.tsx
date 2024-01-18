@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "@phosphor-icons/react";
 
@@ -10,7 +10,9 @@ import { Switch } from "@/components/ui/Switch";
 import cn from "@/utils/cn";
 
 const Header = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
+
+  const isDark = theme === "dark" || resolvedTheme === "dark";
 
   const [scrolled, setScrolled] = useState(false);
   const [currentSection, setCurrentSection] = useState("");
@@ -44,30 +46,33 @@ const Header = () => {
     ];
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
-      setScrolled(isScrolled);
+  const handleScroll = useCallback(() => {
+    const isScrolled = window.scrollY > 0;
+    setScrolled(isScrolled);
 
-      const currentRoute = routes.find((route) => {
-        const section = document.querySelector(route.path);
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          return rect.top >= 0 && rect.bottom <= window.innerHeight;
-        }
-      });
-
-      if (currentRoute) {
-        setCurrentSection(currentRoute.path);
+    const currentRoute = routes.find((route) => {
+      const section = document.querySelector(route.path);
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        return (
+          (rect.top >= 0 && rect.top <= window.innerHeight) ||
+          (rect.bottom >= 0 && rect.bottom <= window.innerHeight)
+        );
       }
-    };
+    });
 
+    if (currentRoute) {
+      setCurrentSection(currentRoute.path);
+    }
+  }, [routes]);
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [routes]);
+  }, [handleScroll, routes]);
 
   const handleToggleDarkMode = (isChecked: boolean) => {
     setTheme(isChecked ? "dark" : "light");
@@ -100,10 +105,10 @@ const Header = () => {
             <Switch
               id="toggle-dark"
               onCheckedChange={handleToggleDarkMode}
-              checked={theme === "dark"}
+              checked={isDark}
             />
             <label htmlFor="toggle-dark">
-              {theme === "dark" ? <Moon size={24} /> : <Sun size={24} />}
+              {isDark ? <Moon size={24} /> : <Sun size={24} />}
             </label>
           </div>
         </nav>
