@@ -1,10 +1,14 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 
 import { PrismicProject } from "@/types/prismic";
 
+import { GithubLogo, ArrowUpRight } from "@phosphor-icons/react";
+
 interface ProjectsSectionProps {
-  projects: PrismicProject[] | undefined;
+  projects: PrismicProject[] | [];
 }
 
 const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
@@ -13,53 +17,63 @@ const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
       <div className="container mx-auto">
         <h2 className="text-4xl font-bold mb-8">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects?.map((project) => (
-            <div
-              key={project.id}
-              className="bg-white dark:bg-gray-700 rounded-lg overflow-hidden shadow-md"
-            >
-              <Image
-                src={project.imageUrl}
-                alt={project.alt}
-                className="w-full h-40 object-cover"
-                width={300}
-                height={200}
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-700 dark:text-gray-300">
-                  {project.description}
-                </p>
-                {project?.tags?.length > 0 &&
-                  project.tags.map((tag) => (
-                    <span
-                      key={`${project.id}-${tag}`}
-                      className="inline-block bg-gray-200 rounded-sm px-2 py-0.5 text-xs font-semibold text-gray-700 mr-2"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                <div className="flex justify-between mt-4">
+          {projects?.map((project) => {
+            const hoverClasses =
+              "hover:mt-[-1.5rem] hover:mb-[1.5rem] hover:border-primary hover:dark:border-primary hover:shadow-2xl hover:shadow-blue-300 dark:hover:shadow-blue-900";
+            return (
+              <div
+                key={project.id}
+                className={`relative bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden transition-all ${hoverClasses}`}
+              >
+                <Image
+                  src={project.imageUrl || ""}
+                  alt={project.alt || ""}
+                  className="w-full h-40 object-cover"
+                  width={300}
+                  height={200}
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-sm text-justify mb-3 text-gray-700 dark:text-gray-300">
+                    {project.description?.map((paragraph, index) => (
+                      <span key={`desc-${project.id}-${index}`}>
+                        {paragraph.text}
+                      </span>
+                    ))}
+                  </p>
+                  {project.tags &&
+                    project.tags?.length > 0 &&
+                    project?.tags.map((tag) => (
+                      <span
+                        key={`${project.id}-${tag}`}
+                        className="inline-block bg-gray-200 dark:bg-gray-700 rounded-sm px-1.5 py-0.5 text-xs font-semibold text-gray-700 dark:text-gray-200 border-2 border-transparent mr-2 transition-all hover:bg-gray-300 dark:hover:bg-gray-600 hover:border-primary"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                </div>
+
+                <div className="absolute inset-0 bg-white dark:bg-black bg-opacity-40 dark:bg-opacity-60 hover:backdrop-filter hover:backdrop-blur-sm opacity-0 hover:opacity-100 transition-opacity flex flex-col items-center justify-center">
                   <a
                     href={project.projectUrl?.url}
                     target={project.projectUrl?.target}
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
+                    className="flex text-xl font-bold hover:text-primary transition-colors"
                   >
-                    View Project
+                    <ArrowUpRight className="mr-2" size={28} weight="bold" />
+                    Live preview
                   </a>
                   <a
                     href={project.sourceCode?.url}
                     target={project.sourceCode?.target}
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
+                    className="flex text-xl font-bold mt-4 hover:text-primary transition-colors"
                   >
+                    <GithubLogo className="mr-2" size={28} weight="bold" />
                     Source code
                   </a>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

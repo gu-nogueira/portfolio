@@ -83,7 +83,7 @@ async function getPrismicContent(): Promise<PrismicData | undefined> {
       return {
         id: response.uid,
         title: sliceMainContent?.project_name[0]?.text,
-        description: sliceMainContent?.project_description[0]?.text,
+        description: sliceMainContent?.project_description,
         imageUrl: sliceMainContent?.project_image.url,
         alt: sliceMainContent?.project_image.alt,
         projectUrl: sliceMainContent?.project_url,

@@ -3,15 +3,19 @@ type PrismicUrl = {
   target?: string | undefined;
 };
 
+type PrismicRichText = {
+  text?: string | undefined;
+};
+
 export type PrismicProject = {
   id?: string | undefined;
   title?: string | undefined;
-  description?: string | undefined;
+  description?: PrismicRichText[] | undefined;
   projectUrl?: PrismicUrl;
   imageUrl?: string;
   alt?: string | undefined;
   sourceCode?: PrismicUrl;
-  tags?: string[] | undefined;
+  tags?: string[];
 };
 
 export type PrismicData = {
