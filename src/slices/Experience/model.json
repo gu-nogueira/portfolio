@@ -1,0 +1,63 @@
+{
+  "id": "experience",
+  "type": "SharedSlice",
+  "name": "Experience",
+  "description": "Experience",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "experience_title": {
+          "type": "Text",
+          "config": {
+            "label": "Experience Title",
+            "placeholder": ""
+          }
+        },
+        "experience_company": {
+          "type": "Text",
+          "config": {
+            "label": "Experience Company",
+            "placeholder": ""
+          }
+        },
+        "experience_location": {
+          "type": "Text",
+          "config": {
+            "label": "Experience Location",
+            "placeholder": ""
+          }
+        },
+        "experience_start_date": {
+          "type": "Date",
+          "config": {
+            "label": "Experience Start Date",
+            "placeholder": ""
+          }
+        },
+        "experience_end_date": {
+          "type": "Date",
+          "config": {
+            "label": "Experience End Date",
+            "placeholder": ""
+          }
+        },
+        "experience_description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Experience Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

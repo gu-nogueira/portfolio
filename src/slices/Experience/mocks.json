@@ -1,0 +1,45 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"experience_title": {
+				"__TYPE__": "FieldContent",
+				"value": "salt",
+				"type": "Text"
+			},
+			"experience_company": {
+				"__TYPE__": "FieldContent",
+				"value": "waste",
+				"type": "Text"
+			},
+			"experience_location": {
+				"__TYPE__": "FieldContent",
+				"value": "atmosphere",
+				"type": "Text"
+			},
+			"experience_start_date": {
+				"__TYPE__": "FieldContent",
+				"type": "Date",
+				"value": "2018-01-12"
+			},
+			"experience_end_date": {
+				"__TYPE__": "FieldContent",
+				"type": "Date",
+				"value": "2019-08-01"
+			},
+			"experience_description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Laborum cupidatat dolore cupidatat cillum. Reprehenderit non esse sit consectetur ad ipsum est in ullamco ex aliqua elit sit."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]
