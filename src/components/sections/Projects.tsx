@@ -6,6 +6,7 @@ import Image from "next/image";
 import { PrismicProject } from "@/types/prismic";
 
 import { GithubLogo, ArrowUpRight } from "@phosphor-icons/react";
+import Badge from "../ui/Badge";
 
 interface ProjectsSectionProps {
   projects: PrismicProject[] | [];
@@ -15,7 +16,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
   return (
     <section id="projects" className="py-16">
       <div className="container mx-auto">
-        <h2 className="text-4xl font-bold mb-8">Projects</h2>
+        <h2 className="text-center text-4xl font-bold mb-8">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects?.map((project) => {
             const hoverClasses =
@@ -34,7 +35,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-sm text-justify mb-3 text-gray-700 dark:text-gray-300">
+                  <p className="text-sm text-justify mb-3 text-gray-700 dark:text-gray-400">
                     {project.description?.map((paragraph, index) => (
                       <span key={`desc-${project.id}-${index}`}>
                         {paragraph.text}
@@ -44,12 +45,9 @@ const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
                   {project.tags &&
                     project.tags?.length > 0 &&
                     project?.tags.map((tag) => (
-                      <span
-                        key={`${project.id}-${tag}`}
-                        className="inline-block bg-gray-200 dark:bg-gray-700 rounded-sm px-1.5 py-0.5 text-xs font-semibold text-gray-700 dark:text-gray-200 border-2 border-transparent mr-2 transition-all hover:bg-gray-300 dark:hover:bg-gray-600 hover:border-primary"
-                      >
+                      <Badge key={`${project?.id}-${tag}`} size="sm">
                         {tag}
-                      </span>
+                      </Badge>
                     ))}
                 </div>
 

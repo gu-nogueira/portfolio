@@ -24,8 +24,8 @@ const Header = () => {
         name: "Home",
       },
       {
-        path: "#presentation",
-        name: "Presentation",
+        path: "#about-me",
+        name: "About me",
       },
       {
         path: "#projects",
@@ -34,10 +34,6 @@ const Header = () => {
       {
         path: "#experiences",
         name: "Experiences",
-      },
-      {
-        path: "#education",
-        name: "Education",
       },
       {
         path: "#reach-me",

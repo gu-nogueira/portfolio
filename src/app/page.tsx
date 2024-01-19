@@ -5,11 +5,10 @@ import { PrismicData } from "@/types/prismic";
 
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
-import Presentation from "@/components/sections/Presentation";
+import AboutMe from "@/components/sections/AboutMe";
 import Footer from "@/components/sections/Footer";
 import Projects from "@/components/sections/Projects";
 import Experiences from "@/components/sections/Experiences";
-import Education from "@/components/sections/Education";
 import ReachMe from "@/components/sections/ReachMe";
 
 export default async function Home({}) {
@@ -23,13 +22,11 @@ export default async function Home({}) {
       <Header />
       <Hero userData={portfolioData?.userData} />
       <hr className="border-gray-200 dark:border-gray-700" />
-      <Presentation />
+      <AboutMe />
       <hr className="border-gray-200 dark:border-gray-700" />
       <Projects projects={prismicContent?.projects} />
       <hr className="border-gray-200 dark:border-gray-700" />
       <Experiences />
-      <hr className="border-gray-200 dark:border-gray-700" />
-      <Education />
       <hr className="border-gray-200 dark:border-gray-700" />
       <ReachMe />
       <Footer />

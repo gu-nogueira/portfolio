@@ -3,7 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["avatars.githubusercontent.com", "images.prismic.io"],
+    dangerouslyAllowSVG: true,
+    domains: [
+      "avatars.githubusercontent.com",
+      "skillicons.dev",
+      "images.prismic.io",
+    ],
   },
   eslint: {
     ignoreDuringBuilds: true,

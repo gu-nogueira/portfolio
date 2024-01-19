@@ -88,7 +88,7 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
   };
 
   return (
-    <section id="hero" className="h-screen flex items-center text-center">
+    <section id="hero" className="min-h-screen flex items-center text-center">
       <div className="container mx-auto">
         {userData && (
           <div className="relative inline-block">
