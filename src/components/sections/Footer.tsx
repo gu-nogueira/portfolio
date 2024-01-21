@@ -5,8 +5,8 @@ import Badge from "../ui/Badge";
 const Footer = () => {
   const techs = ["Next.js", "React", "Tailwind", "Prismic", "Shadcn/ui"];
   return (
-    <>
-      <div className="container mx-auto flex items-center justify-center px-6 py-3 border-t-2 border-gray-200 dark:border-gray-700">
+    <div className="border-t-2 border-gray-200 dark:border-gray-700">
+      <div className="container mx-auto flex items-center justify-center px-6 py-3.5">
         <span className="text-sm mr-2">
           © {new Date().getFullYear()} Crafted by{" "}
           <a
@@ -52,7 +52,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

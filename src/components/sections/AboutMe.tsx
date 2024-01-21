@@ -24,6 +24,7 @@ const AboutMe = () => {
     "express",
     "sequelize",
     "prisma",
+    "sequelize",
     "supabase",
     "postgres",
     "redis",

@@ -9,7 +9,7 @@ import { GithubLogo, ArrowUpRight } from "@phosphor-icons/react";
 import Badge from "../ui/Badge";
 
 interface ProjectsSectionProps {
-  projects: PrismicProject[] | [];
+  projects?: PrismicProject[];
 }
 
 const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
@@ -34,7 +34,14 @@ const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
                   height={200}
                 />
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  <div className="mb-1">
+                    <h3 className="text-xl font-bold mb-1">{project.title}</h3>
+                    {project?.builtAt && (
+                      <time className="text-sm text-gray-800 dark:text-gray-300">
+                        {project?.builtAt}
+                      </time>
+                    )}
+                  </div>
                   <p className="text-sm text-justify mb-3 text-gray-700 dark:text-gray-400">
                     {project.description?.map((paragraph, index) => (
                       <span key={`desc-${project.id}-${index}`}>
@@ -42,32 +49,42 @@ const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
                       </span>
                     ))}
                   </p>
-                  {project.tags &&
-                    project.tags?.length > 0 &&
-                    project?.tags.map((tag) => (
-                      <Badge key={`${project?.id}-${tag}`} size="sm">
-                        {tag}
-                      </Badge>
-                    ))}
+                  <div className="flex flex-wrap gap-2.5">
+                    {project.tags &&
+                      project.tags?.length > 0 &&
+                      project?.tags.map((tag) => (
+                        <Badge
+                          key={`${project?.id}-${tag}`}
+                          size="sm"
+                          className="whitespace-nowrap me-0"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                  </div>
                 </div>
 
                 <div className="absolute inset-0 bg-white dark:bg-black bg-opacity-40 dark:bg-opacity-60 hover:backdrop-filter hover:backdrop-blur-sm opacity-0 hover:opacity-100 transition-opacity flex flex-col items-center justify-center">
-                  <a
-                    href={project.projectUrl?.url}
-                    target={project.projectUrl?.target}
-                    className="flex text-xl font-bold hover:text-primary transition-colors"
-                  >
-                    <ArrowUpRight className="mr-2" size={28} weight="bold" />
-                    Live preview
-                  </a>
-                  <a
-                    href={project.sourceCode?.url}
-                    target={project.sourceCode?.target}
-                    className="flex text-xl font-bold mt-4 hover:text-primary transition-colors"
-                  >
-                    <GithubLogo className="mr-2" size={28} weight="bold" />
-                    Source code
-                  </a>
+                  {project?.projectUrl?.url && (
+                    <a
+                      href={project.projectUrl?.url}
+                      target={project.projectUrl?.target}
+                      className="flex text-xl font-bold hover:text-primary transition-colors"
+                    >
+                      <ArrowUpRight className="mr-2" size={28} weight="bold" />
+                      Live preview
+                    </a>
+                  )}
+                  {project?.sourceCode?.url && (
+                    <a
+                      href={project.sourceCode?.url}
+                      target={project.sourceCode?.target}
+                      className="flex text-xl font-bold mt-4 hover:text-primary transition-colors"
+                    >
+                      <GithubLogo className="mr-2" size={28} weight="bold" />
+                      Source code
+                    </a>
+                  )}
                 </div>
               </div>
             );

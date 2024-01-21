@@ -7,10 +7,12 @@ interface BadgeProps {
   size?: "sm" | "md" | "lg";
 }
 
-const Badge = React.forwardRef<
-  HTMLSpanElement,
-  React.HTMLAttributes<HTMLSpanElement> & BadgeProps
->(({ className, size, children, ...props }) => {
+const Badge: React.FC<BadgeProps & React.HTMLAttributes<HTMLSpanElement>> = ({
+  className,
+  size,
+  children,
+  ...props
+}) => {
   const sizes = {
     sm: "px-2 py-0.5 text-xs rounded",
     md: "px-3 py-1 text-sm rounded-sm",
@@ -28,8 +30,6 @@ const Badge = React.forwardRef<
       {children}
     </span>
   );
-});
-
-Badge.displayName = "Badge";
+};
 
 export default Badge;

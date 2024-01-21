@@ -1,7 +1,14 @@
 import { createClient } from "@/services/prismic";
 
 import { GithubUserData, RepositoryData } from "@/types/github";
-import { PrismicData } from "@/types/prismic";
+import {
+  PrismicEducation,
+  PrismicExperience,
+  PrismicProject,
+} from "@/types/prismic";
+
+import parseDate from "@/utils/parseDate";
+import sortByDate from "@/utils/sortByDate";
 
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
@@ -12,21 +19,23 @@ import Experiences from "@/components/sections/Experiences";
 import ReachMe from "@/components/sections/ReachMe";
 
 export default async function Home({}) {
-  const [portfolioData, prismicContent] = await Promise.all([
-    getPortfolioData(),
-    getPrismicContent(),
+  const [githubData, projects, education, experiences] = await Promise.all([
+    getGithubData(),
+    getProjects(),
+    getEducation(),
+    getExperiences(),
   ]);
 
   return (
     <>
       <Header />
-      <Hero userData={portfolioData?.userData} />
+      <Hero userData={githubData?.userData} />
       <hr className="border-gray-200 dark:border-gray-700" />
       <AboutMe />
       <hr className="border-gray-200 dark:border-gray-700" />
-      <Projects projects={prismicContent?.projects} />
+      <Projects projects={projects} />
       <hr className="border-gray-200 dark:border-gray-700" />
-      <Experiences />
+      <Experiences experiences={experiences} education={education} />
       <hr className="border-gray-200 dark:border-gray-700" />
       <ReachMe />
       <Footer />
@@ -34,7 +43,7 @@ export default async function Home({}) {
   );
 }
 
-async function getPortfolioData() {
+async function getGithubData() {
   try {
     const rawResponses = await Promise.allSettled([
       fetch("https://api.github.com/users/gu-nogueira", {
@@ -65,18 +74,32 @@ async function getPortfolioData() {
   }
 }
 
-async function getPrismicContent(): Promise<PrismicData | undefined> {
+async function getProjects(): Promise<PrismicProject[] | undefined> {
   const prismic = createClient();
 
   try {
     const response = await prismic.getAllByType("project", {
       // fetch: ["post.title", "post.content"],
       pageSize: 100,
+      orderings: [
+        {
+          // field: "my.project.project_built_at",
+          field: "document.last_publication_date",
+          direction: "asc",
+        },
+      ],
     });
 
     const projects = response.map((response) => {
       const sliceMainContent = response.data.slices[0]?.primary;
       const sliceItems = response.data.slices[0]?.items;
+      const builtAt = parseDate(
+        sliceMainContent?.project_built_at,
+      )?.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+      });
+
       return {
         id: response.uid,
         title: sliceMainContent?.project_name[0]?.text,
@@ -85,13 +108,111 @@ async function getPrismicContent(): Promise<PrismicData | undefined> {
         alt: sliceMainContent?.project_image.alt,
         projectUrl: sliceMainContent?.project_url,
         sourceCode: sliceMainContent?.project_source_code,
+        builtAt: builtAt,
+        rawBuiltAt: sliceMainContent?.project_built_at,
         tags: sliceItems?.map((item) => item.project_tag),
       };
     });
 
-    return {
-      projects,
-    };
+    return sortByDate(projects, "rawBuiltAt", "desc");
+  } catch (error) {
+    console.error("Error fetching prismic content:", error);
+  }
+}
+
+async function getExperiences(): Promise<PrismicExperience[] | undefined> {
+  const prismic = createClient();
+
+  try {
+    const response = await prismic.getAllByType("experiences", {
+      // fetch: ["post.title", "post.content"],
+      pageSize: 100,
+      orderings: [
+        {
+          field: "document.last_publication_date",
+          direction: "asc",
+        },
+      ],
+    });
+
+    const experiences = response.map((response) => {
+      const sliceMainContent = response.data.slices[0]?.primary;
+      const startDate = parseDate(
+        sliceMainContent?.experience_start_date,
+      )?.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+      });
+
+      const endDate = parseDate(
+        sliceMainContent?.experience_end_date,
+      )?.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+      });
+
+      return {
+        id: response.uid,
+        title: sliceMainContent?.experience_title,
+        description: sliceMainContent?.experience_description,
+        company: sliceMainContent?.experience_company,
+        location: sliceMainContent?.experience_location,
+        startDate: startDate,
+        rawStartDate: sliceMainContent?.experience_start_date,
+        endDate: endDate,
+      };
+    });
+
+    return sortByDate(experiences, "rawStartDate", "desc");
+  } catch (error) {
+    console.error("Error fetching prismic content:", error);
+  }
+}
+
+async function getEducation(): Promise<PrismicEducation[] | undefined> {
+  const prismic = createClient();
+
+  try {
+    const response = await prismic.getAllByType("education", {
+      // fetch: ["post.title", "post.content"],
+      pageSize: 100,
+      orderings: [
+        {
+          // field: "my.project.project_built_at",
+          field: "document.last_publication_date",
+          direction: "asc",
+        },
+      ],
+    });
+
+    const educations = response.map((response) => {
+      const sliceMainContent = response.data.slices[0]?.primary;
+      const startDate = parseDate(
+        sliceMainContent?.education_start_date,
+      )?.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+      });
+
+      const endDate = parseDate(
+        sliceMainContent?.education_end_date,
+      )?.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+      });
+
+      return {
+        id: response.uid,
+        title: sliceMainContent?.education_title,
+        institution: sliceMainContent?.education_institution,
+        location: sliceMainContent?.education_location,
+        startDate: startDate,
+        rawStartDate: sliceMainContent?.education_start_date,
+        endDate: endDate,
+      };
+    });
+
+    return sortByDate(educations, "rawStartDate", "desc");
   } catch (error) {
     console.error("Error fetching prismic content:", error);
   }

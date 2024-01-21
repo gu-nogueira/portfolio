@@ -2,85 +2,19 @@
 
 import React from "react";
 
+import { PrismicEducation, PrismicExperience } from "@/types/prismic";
+
 import { Suitcase, Student } from "@phosphor-icons/react";
 import Badge from "../ui/Badge";
 
-interface Experience {
-  id: string;
-  title: string;
-  company: string;
-  location: string;
-  startDate: string;
-  endDate?: string;
-  description: string;
-}
-
-interface Education {
-  id: string;
-  title: string;
-  institution: string;
-  location: string;
-  startDate: string;
-  endDate?: string;
-}
-
 interface ExperiencesProps {
-  experiences: Experience[];
-  education: Education[];
+  experiences?: PrismicExperience[];
+  education?: PrismicEducation[];
 }
-
-const mockExperiences = [
-  {
-    id: "1",
-    title: "Software Engineer",
-    company: "Apple",
-    startDate: "2020-01-01",
-    endDate: "",
-    location: "Remote",
-    description: "Description of experience 1",
-  },
-  {
-    id: "2",
-    title: "Software Engineer",
-    company: "Apple",
-    startDate: "2020-01-01",
-    endDate: "2022-01-01",
-    location: "Remote",
-    description: "Description of experience 1",
-  },
-  {
-    id: "3",
-    title: "Software Engineer",
-    company: "Apple",
-    startDate: "2020-01-01",
-    endDate: "2022-01-01",
-    location: "Remote",
-    description: "Description of experience 1",
-  },
-];
-
-const mockEducaton = [
-  {
-    id: "1",
-    title: "Software Engineer",
-    institution: "Apple",
-    location: "Remote",
-    startDate: "2020-01-01",
-    endDate: "",
-  },
-  {
-    id: "2",
-    title: "Software Engineer",
-    institution: "Apple",
-    location: "Remote",
-    startDate: "2020-01-01",
-    endDate: "2022-01-01",
-  },
-];
 
 const Experiences: React.FC<ExperiencesProps> = ({
-  experiences = mockExperiences,
-  education = mockEducaton,
+  experiences,
+  education,
 }) => {
   return (
     <section id="experiences" className="py-16">
@@ -92,7 +26,7 @@ const Experiences: React.FC<ExperiencesProps> = ({
           <ol
             className={`relative border-r border-gray-200 dark:border-gray-700 me-4 my-auto`}
           >
-            {education.map((education) => {
+            {education?.map((education) => {
               return (
                 <li key={`experience-${education.id}`} className="mb-10 me-8">
                   <span className="absolute flex items-center justify-center w-7 h-7 bg-cyan-100 rounded-full -end-3.5 ring-8 ring-white dark:ring-background dark:bg-cyan-900">
@@ -101,7 +35,7 @@ const Experiences: React.FC<ExperiencesProps> = ({
                       className="text-cyan-500 dark:text-cyan-300"
                     />
                   </span>
-                  <h3 className="flex items-center justify-end text-lg font-semibold text-gray-900 dark:text-white">
+                  <h3 className="flex items-center justify-end text-right text-lg font-semibold text-gray-900 dark:text-white">
                     {education.title}
                   </h3>
                   <p className="flex items-center justify-end text-gray-700 dark:text-gray-300">
@@ -117,7 +51,7 @@ const Experiences: React.FC<ExperiencesProps> = ({
           <ol
             className={`relative border-s border-gray-200 dark:border-gray-700 ms-4`}
           >
-            {experiences.map((experience) => {
+            {experiences?.map((experience) => {
               // const isOdd = (index + 1) % 2 === 0;
               // const isLast = index === experiences.length - 1;
               return (
@@ -140,8 +74,12 @@ const Experiences: React.FC<ExperiencesProps> = ({
                   <time className="mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                     {experience.startDate} - {experience.endDate || "Present"}
                   </time>
-                  <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                    {experience.description}
+                  <p className="mb-4 text-base text-justify font-normal text-gray-500 dark:text-gray-400">
+                    {experience.description?.map((paragraph, index) => (
+                      <span key={`desc-${experience.id}-${index}`}>
+                        {paragraph.text}
+                      </span>
+                    ))}
                   </p>
                 </li>
               );
