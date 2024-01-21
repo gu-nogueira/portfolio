@@ -90,11 +90,34 @@ module.exports = {
             transformOrigin: "bottom left",
           },
         },
+        "gradient-flow": {
+          "0%": {
+            "background-position": "0% 50%",
+            "background-size": "100% 100%",
+          },
+          "25%": {
+            "background-position": "75% 50%",
+            "background-size": "175% 175%",
+          },
+          "50%": {
+            "background-position": "0% 50%",
+            "background-size": "100% 100%",
+          },
+          "75%": {
+            "background-position": "0% 75%",
+            "background-size": "175% 175%",
+          },
+          "100%": {
+            "background-position": "0% 50%",
+            "background-size": "100% 100%",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         handshake: "handshake 0.75s ease-out infinite",
+        "gradient-flow": "gradient-flow 5s ease-in-out infinite",
       },
     },
   },

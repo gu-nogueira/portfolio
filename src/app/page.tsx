@@ -79,7 +79,6 @@ async function getProjects(): Promise<PrismicProject[] | undefined> {
 
   try {
     const response = await prismic.getAllByType("project", {
-      // fetch: ["post.title", "post.content"],
       pageSize: 100,
       orderings: [
         {
@@ -100,10 +99,12 @@ async function getProjects(): Promise<PrismicProject[] | undefined> {
         month: "long",
       });
 
+      const descriptionText = sliceMainContent?.project_description.shift();
+
       return {
         id: response.uid,
         title: sliceMainContent?.project_name[0]?.text,
-        description: sliceMainContent?.project_description,
+        description: descriptionText,
         imageUrl: sliceMainContent?.project_image.url,
         alt: sliceMainContent?.project_image.alt,
         projectUrl: sliceMainContent?.project_url,
@@ -151,10 +152,19 @@ async function getExperiences(): Promise<PrismicExperience[] | undefined> {
         month: "long",
       });
 
+      const AMOUNT_OF_WORDS = 24;
+      const descriptionText = sliceMainContent?.experience_description.shift();
+      const rawDescription = descriptionText?.text ? descriptionText.text : "";
+      const isDescriptionLong =
+        rawDescription.split(" ").length > AMOUNT_OF_WORDS;
+      const trimmedDescription =
+        rawDescription.split(" ").slice(0, AMOUNT_OF_WORDS).join(" ") + "...";
+
       return {
         id: response.uid,
         title: sliceMainContent?.experience_title,
-        description: sliceMainContent?.experience_description,
+        description: descriptionText,
+        resumedDescription: isDescriptionLong && trimmedDescription,
         company: sliceMainContent?.experience_company,
         location: sliceMainContent?.experience_location,
         startDate: startDate,
@@ -174,11 +184,9 @@ async function getEducation(): Promise<PrismicEducation[] | undefined> {
 
   try {
     const response = await prismic.getAllByType("education", {
-      // fetch: ["post.title", "post.content"],
       pageSize: 100,
       orderings: [
         {
-          // field: "my.project.project_built_at",
           field: "document.last_publication_date",
           direction: "asc",
         },

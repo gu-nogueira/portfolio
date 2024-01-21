@@ -8,9 +8,9 @@ type PrismicRichText = {
 };
 
 export type PrismicProject = {
-  id?: string | undefined;
+  id: string | undefined;
   title?: string | undefined;
-  description?: PrismicRichText[] | undefined;
+  description?: PrismicRichText | undefined;
   projectUrl?: PrismicUrl;
   imageUrl?: string;
   alt?: string | undefined;
@@ -20,9 +20,10 @@ export type PrismicProject = {
 };
 
 export type PrismicExperience = {
-  id?: string | undefined;
+  id: string | undefined;
   title?: string | undefined;
-  description?: PrismicRichText[] | undefined;
+  description?: PrismicRichText | undefined;
+  resumedDescription?: string | undefined;
   company?: string | undefined;
   location?: string | undefined;
   startDate?: string | undefined;
@@ -30,7 +31,7 @@ export type PrismicExperience = {
 };
 
 export type PrismicEducation = {
-  id?: string | undefined;
+  id: string | undefined;
   title?: string | undefined;
   institution?: string | undefined;
   location?: string | undefined;

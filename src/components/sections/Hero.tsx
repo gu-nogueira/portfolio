@@ -72,15 +72,6 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
     }, 40);
   };
 
-  // useEffect(() => {
-  //   const cursorInterval = setInterval(() => {
-  //     setPulsingCursor((prevPulsingCursor) => !prevPulsingCursor);
-  //   }, 500);
-  //   return () => {
-  //     clearInterval(cursorInterval);
-  //   };
-  // }, []);
-
   const callsCursorInterval = () => {
     return setInterval(() => {
       setPulsingCursor((prevPulsingCursor) => !prevPulsingCursor);
@@ -92,11 +83,11 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
       <div className="container mx-auto">
         {userData && (
           <div className="relative inline-block">
-            <div className="p-1 rounded-full overflow-hidden bg-gradient-to-tl from-primary to-cyan-200 dark:to-green-300">
+            <div className="p-1 rounded-full overflow-hidden bg-gradient-to-tl from-primary to-cyan-200 dark:to-green-300 animate-gradient-flow">
               <Image
                 src={userData.avatar_url}
                 alt="Profile"
-                className="rounded-full w-36 h-36 object-cover border-4 border-background"
+                className="rounded-full w-36 h-36 object-cover border-[6px] border-background"
                 width={100}
                 height={100}
               />
@@ -114,9 +105,9 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
           {" "}
           I&apos;m a {displayedPhrase + (pulsingCursor ? "|" : "")}
         </h1>
-        <p className="text-xl mt-6">
-          I&apos;m always looking for new projects and challenges. Checkout my
-          projects! 👇
+        <p className="text-xl mt-4">
+          Work with someone who can handle any challenge. Checkout some of my
+          works 👇
         </p>
         <div className="flex items-center justify-center space-x-4 mt-8">
           <Link

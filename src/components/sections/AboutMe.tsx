@@ -3,12 +3,14 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 
+import withTitles from "@/utils/withTitles";
+
 const AboutMe = () => {
-  const { theme, resolvedTheme, systemTheme, forcedTheme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
 
-  const finalTheme = theme || resolvedTheme || systemTheme || forcedTheme;
+  const finalTheme = theme || resolvedTheme || "light";
 
-  const LanguagesIcons = ["js", "ts", "php"].join(",");
+  const LanguagesIcons = ["js", "ts", "php"];
   const FrontendIcons = [
     "react",
     "vite",
@@ -18,45 +20,42 @@ const AboutMe = () => {
     "styledcomponents",
     "sass",
     "bootstrap",
-  ].join(",");
+  ];
   const BackendIcons = [
     "nodejs",
     "express",
+    "adonis",
+    "nestjs",
     "sequelize",
     "prisma",
-    "sequelize",
     "supabase",
     "postgres",
+    "mysql",
+    "mongodb",
     "redis",
-  ].join(",");
+    "kafka",
+    "graphql",
+  ];
   const OthersIcons = [
+    "vitest",
     "jest",
     "sentry",
     "linux",
     "docker",
     "nginx",
-    "aws",
-  ].join(",");
-  const BackendOtherIcons = [
-    "adonis",
-    "nestjs",
-    "kafka",
-    "graphql",
-    "vitest",
-    "mongodb",
-    "mysql",
-    "wordpress",
     "gcp",
-  ].join(",");
-  const DesignIcons = ["ai", "ps", "ae", "pr", "figma"].join(",");
-  const AllTechIcons = [
-    LanguagesIcons,
-    FrontendIcons,
-    BackendIcons,
-    OthersIcons,
-    BackendOtherIcons,
-    DesignIcons,
-  ].join(",");
+    "aws",
+    "wordpress",
+  ];
+  const DesignIcons = ["ai", "ps", "ae", "pr", "figma"];
+  const AllTechIcons = withTitles(
+    LanguagesIcons.concat(
+      FrontendIcons,
+      BackendIcons,
+      OthersIcons,
+      DesignIcons,
+    ),
+  );
 
   return (
     <section id="about-me" className="bg-gray-100 dark:bg-gray-900 py-16">
@@ -99,14 +98,27 @@ const AboutMe = () => {
             <h3 className="text-center text-2xl font-semibold mb-4">
               Techs i oftenly work with
             </h3>
-            <div className="flex flex-col items-center ">
-              <Image
+            <div className="flex flex-wrap gap-2">
+              {AllTechIcons?.length > 0 &&
+                AllTechIcons.map((icon, index) => (
+                  <Image
+                    key={icon.tech + "-" + index}
+                    alt={icon.title}
+                    title={icon.title}
+                    height="40"
+                    width="40"
+                    className="w-16 h-16 object-contain"
+                    src={`https://skillicons.dev/icons?i=${icon.tech}&theme=${finalTheme}`}
+                  />
+                ))}
+              {/* <Image
                 alt="Tech icons"
+                title="Tech icons"
                 height="40"
                 width="300"
                 className="w-full"
-                src={`https://skillicons.dev/icons?i=${AllTechIcons}gma&theme=${finalTheme}&perline=9`}
-              />
+                src={`https://skillicons.dev/icons?i=${AllTechIcons}&theme=${finalTheme}&perline=9`}
+              /> */}
             </div>
           </div>
         </div>

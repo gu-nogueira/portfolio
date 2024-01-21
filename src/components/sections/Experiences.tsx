@@ -1,11 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import { PrismicEducation, PrismicExperience } from "@/types/prismic";
 
 import { Suitcase, Student } from "@phosphor-icons/react";
-import Badge from "../ui/Badge";
+
+import Badge from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 
 interface ExperiencesProps {
   experiences?: PrismicExperience[];
@@ -16,6 +18,25 @@ const Experiences: React.FC<ExperiencesProps> = ({
   experiences,
   education,
 }) => {
+  const [jobExperiences, setJobExperiences] = useState<PrismicExperience[]>(
+    experiences || [],
+  );
+  const handleShowFullDescription = (experienceId: string) => {
+    const draft = [...jobExperiences];
+    const experienceIndex = draft?.findIndex(
+      (experience) => experience.id === experienceId,
+    );
+
+    if (typeof experienceIndex === "number" && experienceIndex !== -1) {
+      draft[experienceIndex] = {
+        ...draft[experienceIndex],
+        resumedDescription: undefined,
+      };
+    }
+
+    setJobExperiences(draft);
+  };
+
   return (
     <section id="experiences" className="py-16">
       <div className="container mx-auto">
@@ -51,7 +72,7 @@ const Experiences: React.FC<ExperiencesProps> = ({
           <ol
             className={`relative border-s border-gray-200 dark:border-gray-700 ms-4`}
           >
-            {experiences?.map((experience) => {
+            {jobExperiences?.map((experience) => {
               // const isOdd = (index + 1) % 2 === 0;
               // const isLast = index === experiences.length - 1;
               return (
@@ -75,11 +96,25 @@ const Experiences: React.FC<ExperiencesProps> = ({
                     {experience.startDate} - {experience.endDate || "Present"}
                   </time>
                   <p className="mb-4 text-base text-justify font-normal text-gray-500 dark:text-gray-400">
-                    {experience.description?.map((paragraph, index) => (
-                      <span key={`desc-${experience.id}-${index}`}>
-                        {paragraph.text}
-                      </span>
-                    ))}
+                    <span id={`desc-${experience.id}`}>
+                      {experience?.resumedDescription ? (
+                        <>
+                          {experience?.resumedDescription}
+                          <Button
+                            size="sm"
+                            className="ml-2 p-0 h-6"
+                            variant="link"
+                            onClick={() =>
+                              handleShowFullDescription(experience.id)
+                            }
+                          >
+                            Read more
+                          </Button>
+                        </>
+                      ) : (
+                        experience?.description?.text
+                      )}
+                    </span>
                   </p>
                 </li>
               );

@@ -43,11 +43,9 @@ const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
                     )}
                   </div>
                   <p className="text-sm text-justify mb-3 text-gray-700 dark:text-gray-400">
-                    {project.description?.map((paragraph, index) => (
-                      <span key={`desc-${project.id}-${index}`}>
-                        {paragraph.text}
-                      </span>
-                    ))}
+                    <span id={`desc-${project.id}`}>
+                      {project?.description?.text}
+                    </span>
                   </p>
                   <div className="flex flex-wrap gap-2.5">
                     {project.tags &&
