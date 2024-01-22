@@ -58,7 +58,7 @@ const Experiences: React.FC<ExperiencesProps> = ({
                   className="mb-10 ms-8 lg:me-8"
                 >
                   <span
-                    className={`absolute flex items-center justify-center w-7 h-7 bg-cyan-100 rounded-full ${isMobile ? "-start-3.5" : "-end-3.5"} ring-8 ring-white dark:ring-background dark:bg-cyan-900`}
+                    className={`absolute flex items-center justify-center w-7 h-7 bg-cyan-100 rounded-full ${isMobile ? "-start-3.5" : "-end-3.5"} ring-8 ring-background  dark:bg-cyan-900`}
                   >
                     <Student
                       size={18}
@@ -86,7 +86,7 @@ const Experiences: React.FC<ExperiencesProps> = ({
               // const isLast = index === experiences.length - 1;
               return (
                 <li key={`experience-${experience.id}`} className="mb-10 ms-8">
-                  <span className="absolute flex items-center justify-center w-7 h-7 bg-blue-100 rounded-full -start-3.5 ring-8 ring-white dark:ring-background dark:bg-blue-900">
+                  <span className="absolute flex items-center justify-center w-7 h-7 bg-blue-100 rounded-full -start-3.5 ring-8 ring-background dark:bg-blue-900">
                     <Suitcase
                       size={18}
                       className="text-primary dark:text-blue-300"
