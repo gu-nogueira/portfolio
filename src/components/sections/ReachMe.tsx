@@ -14,10 +14,12 @@ const ReachMe = () => {
   return (
     <section
       id="reach-me"
-      className="min-h-screen flex items-center text-center"
+      className="min-h-[75vh] lg:min-h-screen flex items-center text-center"
     >
       <div className="container mx-auto">
-        <h2 className="text-center text-4xl font-bold mb-6">Reach me</h2>
+        <h2 className="text-center text-3xl lg:text-4xl font-bold mb-6">
+          Reach me
+        </h2>
 
         <div className="flex justify-center space-x-4 mb-8">
           <a
@@ -26,7 +28,7 @@ const ReachMe = () => {
             className="text-green-500 hover:text-green-700"
             title="Twitter"
           >
-            <LinkSimple size={24} />
+            <LinkSimple size={32} />
           </a>
           <a
             href="https://www.linkedin.com/in/gustavo-h-nogueira/"
@@ -34,14 +36,14 @@ const ReachMe = () => {
             className="text-blue-800 hover:text-blue-900"
             title="LinkedIn"
           >
-            <LinkedinLogo size={24} />
+            <LinkedinLogo size={32} />
           </a>
           <a
             href="https://github.com/gu-nogueira"
             className="text-gray-800 hover:text-gray-600 dark:text-gray-300 dark:hover:text-white"
             title="GitHub"
           >
-            <GithubLogo size={24} />
+            <GithubLogo size={32} />
           </a>
           <a
             href="https://www.behance.net/gusnogueira"
@@ -49,7 +51,7 @@ const ReachMe = () => {
             className="text-gray-800 hover:text-gray-600 dark:text-gray-300 dark:hover:text-white"
             title="Behance"
           >
-            <BehanceLogo size={24} />
+            <BehanceLogo size={32} />
           </a>
         </div>
 

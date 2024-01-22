@@ -87,7 +87,7 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
               <Image
                 src={userData.avatar_url}
                 alt="Profile"
-                className="rounded-full w-36 h-36 object-cover border-[6px] border-background"
+                className="rounded-full lg:w-36 lg:h-36 object-cover border-[6px] border-background"
                 width={100}
                 height={100}
               />
@@ -95,27 +95,29 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
           </div>
         )}
 
-        <div className="flex justify-center items-center space-x-7 mt-4">
-          <p className="text-lg font-semibold block font-mono">
+        <div className="flex justify-center items-center space-x-7 mt-3 lg:mt-4">
+          <p className="lg:text-lg font-semibold block font-mono">
             Hi there! I&apos;m {userData ? userData.name : "Loading..."}
           </p>
-          <div className="animate-handshake inline-block text-2xl">✋</div>
+          <div className="animate-handshake inline-block text-xl lg:text-2xl">
+            ✋
+          </div>
         </div>
-        <h1 className="text-6xl font-bold mt-2">
+        <h1 className="text-4xl lg:text-6xl font-bold mt-2">
           {" "}
           I&apos;m a {displayedPhrase + (pulsingCursor ? "|" : "")}
         </h1>
-        <p className="text-xl mt-4">
+        <p className="text-lg leading-6 lg:text-xl mt-4">
           Work with someone who can handle any challenge. Checkout some of my
           works 👇
         </p>
-        <div className="flex items-center justify-center space-x-4 mt-8">
+        <div className="flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-x-4 mt-8">
           <Link
             href="#projects"
             className={buttonVariants({
               variant: "outline",
               className:
-                " hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20",
+                "w-full lg:w-auto hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20",
             })}
           >
             See projects
@@ -124,6 +126,7 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
             href="#reach-me"
             className={buttonVariants({
               variant: "default",
+              className: "w-full lg:w-auto",
             })}
           >
             Reach me

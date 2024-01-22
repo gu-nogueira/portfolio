@@ -14,9 +14,11 @@ interface ProjectsSectionProps {
 
 const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
   return (
-    <section id="projects" className="py-16">
+    <section id="projects" className="py-12 lg:py-16">
       <div className="container mx-auto">
-        <h2 className="text-center text-4xl font-bold mb-8">Projects</h2>
+        <h2 className="text-center text-3xl lg:text-4xl font-bold mb-8">
+          Projects
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects?.map((project) => {
             const hoverClasses =
@@ -29,11 +31,11 @@ const Projects: React.FC<ProjectsSectionProps> = ({ projects }) => {
                 <Image
                   src={project.imageUrl || ""}
                   alt={project.alt || ""}
-                  className="w-full h-40 object-cover"
+                  className="w-full h-32 lg:h-40 object-cover"
                   width={300}
                   height={200}
                 />
-                <div className="p-6">
+                <div className="p-4 lg:p-6">
                   <div className="mb-1">
                     <h3 className="text-xl font-bold mb-1">{project.title}</h3>
                     {project?.builtAt && (

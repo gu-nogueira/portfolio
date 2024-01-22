@@ -58,10 +58,15 @@ const AboutMe = () => {
   );
 
   return (
-    <section id="about-me" className="bg-gray-100 dark:bg-gray-900 py-16">
+    <section
+      id="about-me"
+      className="bg-gray-100 dark:bg-gray-900 py-12 lg:py-16"
+    >
       <div className="container mx-auto">
-        <h2 className="text-center text-4xl font-bold mb-6">About me</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <h2 className="text-center text-3xl lg:text-4xl font-bold mb-6">
+          About me
+        </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
             <h3 className="text-center text-2xl font-semibold mb-4">
               Presentation
@@ -98,7 +103,7 @@ const AboutMe = () => {
             <h3 className="text-center text-2xl font-semibold mb-4">
               Techs i oftenly work with
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2">
               {AllTechIcons?.length > 0 &&
                 AllTechIcons.map((icon, index) => (
                   <Image
@@ -107,7 +112,7 @@ const AboutMe = () => {
                     title={icon.title}
                     height="40"
                     width="40"
-                    className="w-16 h-16 object-contain"
+                    className="w-12 h-12 lg:w-16 lg:h-16 object-contain"
                     src={`https://skillicons.dev/icons?i=${icon.tech}&theme=${finalTheme}`}
                   />
                 ))}

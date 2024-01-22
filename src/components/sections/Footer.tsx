@@ -6,8 +6,8 @@ const Footer = () => {
   const techs = ["Next.js", "React", "Tailwind", "Prismic", "Shadcn/ui"];
   return (
     <div className="border-t-2 border-gray-200 dark:border-gray-700">
-      <div className="container mx-auto flex items-center justify-center px-6 py-3.5">
-        <span className="text-sm mr-2">
+      <div className="container mx-auto flex flex-col lg:flex-row items-center space-y-2 lg:space-x-2 justify-center px-6 py-4 lg:py-3.5">
+        <span className="text-sm">
           © {new Date().getFullYear()} Crafted by{" "}
           <a
             href="https://github.com/gu-nogueira"
@@ -24,32 +24,6 @@ const Footer = () => {
               {tech}
             </Badge>
           ))}
-        </div>
-        <div className="social_icons">
-          <a
-            href="https://twitter.com/"
-            aria-label="Twitter"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fa-brands fa-twitter"></i>
-          </a>
-          <a
-            href="https://github.com/gu-nogueira"
-            aria-label="GitHub"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fa-brands fa-github"></i>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/gustavo-h-nogueira/"
-            aria-label="LinkedIn"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fa-brands fa-linkedin"></i>
-          </a>
         </div>
       </div>
     </div>
