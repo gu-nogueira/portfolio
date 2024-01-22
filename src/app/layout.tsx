@@ -1,9 +1,10 @@
+import { Poppins } from "next/font/google";
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/react";
 
 // ** Utils
 import cn from "@/utils/cn";
 
-import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
 
 const poppins = Poppins({
@@ -31,7 +32,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           poppins.variable,
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Analytics />
+        </Providers>
       </body>
     </html>
   );
