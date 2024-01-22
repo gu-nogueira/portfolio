@@ -46,7 +46,7 @@ const ReachMe = () => {
             <GithubLogo size={32} />
           </a>
           <a
-            href="https://www.behance.net/gusnogueira"
+            href="https://www.behance.net/gushnogueira"
             target="_blank"
             className="text-gray-800 hover:text-gray-600 dark:text-gray-300 dark:hover:text-white"
             title="Behance"
